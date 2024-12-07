@@ -5,17 +5,22 @@ import dotenv from "dotenv";
 import { sequelize } from "./config/database.js";
 import createTables from "./config/createTables.js";
 import routes from "./routes/routes.js";
-
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-app.use("/static", express.static("public"));
+
+app.use("/static", express.static(path.resolve(__dirname, "public")));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(routes);
+
 
 // Conecta ao banco e inicializa as tabelas
 const connectDatabase = async () => {
