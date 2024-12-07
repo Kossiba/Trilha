@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
-import defineUserModel from "../models/user.js"; // Função que define o modelo User
+import defineUserModel from "../models/user.js";
+import defineSpeciesModel from "../models/species.js";
 
 dotenv.config();
 
@@ -17,7 +18,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   logging: false,
 });
 
-// Define o modelo User
 const User = defineUserModel(sequelize);
+const Species = defineSpeciesModel(sequelize);
 
-export { sequelize, User }; // Exporta a instância do Sequelize e o modelo User
+export { sequelize, User, Species};
