@@ -21,7 +21,7 @@ export default (sequelize) => {
       allowNull: false,
     },
   }, {
-    tableName: "users", // Nome da tabela no banco
-    timestamps: true, // Adiciona createdAt e updatedAt
+    tableName: "users",
+    timestamps: true,
   });
 };
