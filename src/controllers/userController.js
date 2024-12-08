@@ -1,4 +1,4 @@
-import { User } from "../config/database.js"; // Agora está correto
+import { User } from "../config/database.js";
 
 // Faz um SELECT * na tabela Users
 export const getAllUsers = async (req, res) => {
