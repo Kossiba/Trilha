@@ -1,4 +1,5 @@
 import { User } from "../config/database.js";
+import { Op } from "sequelize";
 
 // Faz um SELECT * na tabela Users
 export const getAllUsers = async (req, res) => {
@@ -7,6 +8,36 @@ export const getAllUsers = async (req, res) => {
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: "Erro ao buscar usuários", error });
+  }
+};
+
+//Realiza login
+export const login = async (req, res) => {
+  try {
+    const { login, password } = req.body;
+
+    if (!login || !password) {
+      return res.status(400).json({ message: "Insira login e senha" });
+    }
+
+    const user = await User.findOne({
+      where: {
+        [Op.or]: [{ email: login }, { name: login }],
+      },
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "Usuário não encontrado." });
+    }
+
+    if (user.password !== password) {
+      return res.status(401).json({ message: "Senha incorreta" });
+    }
+    
+    return res.status(200).json({ message: "Login realizado com sucesso", user });
+  } catch (error) {
+    console.error("Erro ao realizar login:", error);
+    return res.status(500).json({ message: "Erro interno no servidor" });
   }
 };
 
