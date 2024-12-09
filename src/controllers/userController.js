@@ -1,5 +1,8 @@
 import { User } from "../config/database.js";
 import { Op } from "sequelize";
+import jwt from "jsonwebtoken";
+const secretKey = process.env.JWT_SECRET;
+const SECRET_KEY = secretKey;
 
 // Faz um SELECT * na tabela Users
 export const getAllUsers = async (req, res) => {
@@ -33,8 +36,15 @@ export const login = async (req, res) => {
     if (user.password !== password) {
       return res.status(401).json({ message: "Senha incorreta" });
     }
-    
-    return res.status(200).json({ message: "Login realizado com sucesso", user });
+
+    const tokenData = { id: user.id, username: user.name };
+    const token = jwt.sign(tokenData, SECRET_KEY, { expiresIn: '1h' });
+
+    return res.status(200).json({
+      message: "Login realizado com sucesso",
+      token,
+      user: { id: user.id, name: user.name, email: user.email },
+    });
   } catch (error) {
     console.error("Erro ao realizar login:", error);
     return res.status(500).json({ message: "Erro interno no servidor" });
