@@ -1,0 +1,52 @@
+.login-container {
+  background-color: #3c3c3c;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+.login-view {
+  background-color: white;
+  width: 33%;
+  height: 50vh;
+  border: 3px solid orange;
+  border-radius: 20px;
+  padding: 40px 0px 40px 60px;
+  flex-direction: column;
+  display: flex;
+}
+.text-acessAccount {
+  font-size: 35px;
+}
+.input-div {
+  background-color: rgb(174, 174, 174);
+  width: 80%;
+  height: 25%;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.input-text {
+  background-color: rgb(238, 238, 238);
+  border: none;
+  width: 80%;
+  height: 22%;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  font-size: 25px;
+  padding: 35px;
+}
+.button-enter {
+    background-color: rgb(249, 168, 112);
+    border: none;
+    width: 80%;
+    height: 35%;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+}
