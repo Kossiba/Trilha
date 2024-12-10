@@ -1,5 +1,13 @@
 import { Species } from "../config/database.js";
 
+export const getAllSpecies = async (req,res) =>{
+    try{
+        const species = await Species.findAll();
+        res.status(200).json(species);
+    } catch(error){
+        res.status(500).json({ message: "Error:", error});
+    }
+};
 export const getSpeciesById = async (req,res) =>{
     const { id } = req.params;
 
