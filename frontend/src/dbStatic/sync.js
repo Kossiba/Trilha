@@ -2,7 +2,7 @@ import { addAllUsers } from "./offline-db.js";
 
 export async function syncUsersFromBackend() {
   try {
-    const response = await fetch("http://localhost:3000/users");
+    const response = await fetch("https://trilha-2vfh.onrender.com/users");
     if (!response.ok) {
       throw new Error("Erro ao buscar usuários do backend");
     }
