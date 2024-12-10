@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../styles/Login.css";
+import { loginOffline } from "../dbStatic/offline-db";
 
 const Login = () => {
   const [login, setLogin] = useState("");
@@ -32,6 +33,21 @@ const Login = () => {
     } catch (error) {
       console.error("Erro na requisição:", error);
       alert("Ocorreu um erro ao fazer login. Tente novamente.");
+    };
+    
+    try {
+      const result = await loginOffline(login, password);
+
+      if (result.success) {
+        console.log("Login realizado com sucesso (offline):", result.user);
+        alert("Login realizado com sucesso (offline)!");
+      } else {
+        console.error(result.message);
+        alert(result.message);
+      }
+    } catch (error) {
+      console.error("Erro no login offline:", error);
+      alert("Erro ao tentar login offline.");
     }
   };
 
