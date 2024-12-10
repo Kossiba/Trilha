@@ -1,9 +1,10 @@
 import express from "express";
-import { getSpeciesById, createSpecies} from  "../controllers/speciesController.js"
+import { getSpeciesById, createSpecies, getAllSpecies} from  "../controllers/speciesController.js"
 
 const router = express.Router();
 
 router.get("/:id", getSpeciesById);
 router.post("/", createSpecies);
+router.get("/", getAllSpecies);
 
 export default router;
