@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
 import cookieParser from "cookie-parser";
 import { sequelize } from "./config/database.js";
 import createTables from "./config/createTables.js";
@@ -16,6 +17,7 @@ app.use(cookieParser());
 app.use(cors());
 app.use(bodyParser.json());
 app.use(routes);
+app.use("/static", express.static(path.join(__dirname, "static")));
 
 // Conecta ao banco e inicializa as tabelas
 const connectDatabase = async () => {
@@ -31,7 +33,10 @@ const connectDatabase = async () => {
       console.log(`Servidor rodando na porta ${PORT}`);
     });
   } catch (error) {
-    console.error("Erro ao conectar ou sincronizar com o banco de dados:", error);
+    console.error(
+      "Erro ao conectar ou sincronizar com o banco de dados:",
+      error
+    );
   }
 };
 
