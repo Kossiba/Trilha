@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+import Menu from "./pages/Menu";
 import Camera from "./pages/Camera";
+import CardDetails from "./pages/CardDetails";
 import { syncUsersFromBackend } from "./dbStatic/sync";
 import { useEffect, useState } from "react";
 
@@ -31,8 +32,9 @@ const App = () => {
       {isSyncing && <div className="sync-message">Sincronizando dados...</div>}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/Menu" element={<Menu />} />
         <Route path="/camera" element={<Camera />} />
+        <Route path="/card-details" element={<CardDetails />} />
       </Routes>
     </Router>
   );
