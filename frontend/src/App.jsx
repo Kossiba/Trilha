@@ -13,15 +13,19 @@ const App = () => {
     async function synchronizeData() {
       if (navigator.onLine) {
         setIsSyncing(true);
-        await syncUsersFromBackend();
+        try {
+          await syncUsersFromBackend();
+        } catch (error) {
+          console.error("Erro ao sincronizar dados:", error);
+        }
         setIsSyncing(false);
       }
     }
-  
+
     synchronizeData();
-  
+
     window.addEventListener("online", synchronizeData);
-  
+
     return () => {
       window.removeEventListener("online", synchronizeData);
     };
@@ -32,7 +36,7 @@ const App = () => {
       {isSyncing && <div className="sync-message">Sincronizando dados...</div>}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Menu" element={<Menu />} />
+        <Route path="/menu" element={<Menu />} />
         <Route path="/camera" element={<Camera />} />
         <Route path="/card-details" element={<CardDetails />} />
       </Routes>
