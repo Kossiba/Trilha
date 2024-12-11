@@ -9,18 +9,22 @@ const QRCodeScanner = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Acessar a câmera
-    navigator.mediaDevicesF
-      .getUserMedia({ video: { facingMode: "environment" } })
-      .then((stream) => {
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-          videoRef.current.play();
-        }
-      })
-      .catch((err) => {
-        console.error("Erro ao acessar a câmera:", err);
-      });
+    // Verifica se getUserMedia está disponível
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices
+        .getUserMedia({ video: { facingMode: "environment" } })
+        .then((stream) => {
+          if (videoRef.current) {
+            videoRef.current.srcObject = stream;
+            videoRef.current.play();
+          }
+        })
+        .catch((err) => {
+          console.error("Erro ao acessar a câmera:", err);
+        });
+    } else {
+      console.error("getUserMedia não é suportado neste navegador.");
+    }
 
     return () => {
       // Limpa os recursos da câmera ao desmontar o componente
@@ -49,7 +53,8 @@ const QRCodeScanner = () => {
         const code = jsQR(imageData.data, canvas.width, canvas.height);
         if (code) {
           setQrCode(code.data);
-          navigate("/CardDetails", { state: { qrCodeData: code.data } });
+          navigate("/card-details", { state: { qrCodeData: code.data } });
+          clearInterval(interval);
         }
       }
     }, 1000);
