@@ -24,11 +24,15 @@ const CardDetails = () => {
       <div className="view-card-details">
         {speciesDetails ? (
           <>
-            <img src={speciesDetails.imageUrl || "#"} alt="Detalhe do Card" />
-            <a>Nome: {speciesDetails.name}</a>
+            <img
+              src={speciesDetails.Urlimage || "#"}
+              alt="Detalhe do Card"
+              className="card-details-img"
+            />
+            <a>Nome: {speciesDetails.nome}</a>
             <a>Nome popular: {speciesDetails.nomePopular}</a>
             <a>Bioma: {speciesDetails.bioma}</a>
-            <a>Bioma: {speciesDetails.habitat}</a>
+            <a>Habitat: {speciesDetails.habitat}</a>
             <a>Altura: {speciesDetails.altura}</a>
             <a>Diâmetro: {speciesDetails.diametro}</a>
             <a>Longevidade: {speciesDetails.longevidade}</a>
