@@ -23,7 +23,6 @@ export async function syncSpeciesFromBackend() {
 
     const species = await response.json();
     await getAllSpecies(species);
-    console.log("Sincronização de Species concluída.", species);
   } catch (error) {
     console.error("Erro ao sincronizar Species:", error);
   }
