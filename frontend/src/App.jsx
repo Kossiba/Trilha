@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import Camera from "./pages/Camera";
 import CardDetails from "./pages/CardDetails";
-import { syncUsersFromBackend } from "./dbStatic/sync";
+import { syncUsersFromBackend, syncSpeciesFromBackend } from "./dbStatic/sync";
 import { useEffect, useState } from "react";
 
 const App = () => {
@@ -15,6 +15,7 @@ const App = () => {
         setIsSyncing(true);
         try {
           await syncUsersFromBackend();
+          await syncSpeciesFromBackend();
         } catch (error) {
           console.error("Erro ao sincronizar dados:", error);
         }
