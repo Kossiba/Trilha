@@ -34,3 +34,22 @@ export async function loginOffline(name, password) {
 
   return { success: true, message: "Login offline bem-sucedido!", user };
 }
+
+export async function getAllSpecies(species) {
+    const db = await dbPromise;
+    const tx = db.transaction("species", "readwrite");
+
+    for (const specie of species) {
+      await tx.store.put(specie);
+    }
+
+    await tx.done;
+}
+
+export async function getSpeciesById(id) {
+  const db = await dbPromise;
+  const tx = db.transaction("species", "readonly"); 
+  const store = tx.store; 
+
+  return store.get(id);
+}
