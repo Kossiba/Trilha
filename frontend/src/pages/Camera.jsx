@@ -16,7 +16,13 @@ const QRCodeScanner = () => {
         .then((stream) => {
           if (videoRef.current) {
             videoRef.current.srcObject = stream;
-            videoRef.current.play();
+
+            // Aguarde o vídeo carregar completamente
+            videoRef.current.onloadedmetadata = () => {
+              videoRef.current.play().catch((err) => {
+                console.warn("Erro ao iniciar a reprodução do vídeo:", err);
+              });
+            };
           }
         })
         .catch((err) => {
@@ -43,18 +49,25 @@ const QRCodeScanner = () => {
         const context = canvas.getContext("2d");
         const video = videoRef.current;
 
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
+        if (video.videoWidth && video.videoHeight) {
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
 
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+          context.drawImage(video, 0, 0, canvas.width, canvas.height);
+          const imageData = context.getImageData(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
 
-        // Detecta QR Code
-        const code = jsQR(imageData.data, canvas.width, canvas.height);
-        if (code) {
-          setQrCode(code.data);
-          navigate("/card-details", { state: { qrCodeData: code.data } });
-          clearInterval(interval);
+          // Detecta QR Code
+          const code = jsQR(imageData.data, canvas.width, canvas.height);
+          if (code) {
+            setQrCode(code.data);
+            navigate("/card-details", { state: { qrCodeData: code.data } });
+            clearInterval(interval);
+          }
         }
       }
     }, 1000);
