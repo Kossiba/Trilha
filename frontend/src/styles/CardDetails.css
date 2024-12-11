@@ -1,0 +1,19 @@
+.card-details-container {
+  background-color: #206d4a;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.view-card-details {
+  background-color: #ffffff;
+  height: 80%;
+  width: 33%;
+  border-radius: 30px;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
