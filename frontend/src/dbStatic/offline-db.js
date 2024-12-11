@@ -7,7 +7,7 @@ export async function addAllUsers(users) {
   for (const user of users) {
     await tx.store.put(user);
   }
-  
+
   await tx.done;
 }
 
@@ -36,20 +36,22 @@ export async function loginOffline(name, password) {
 }
 
 export async function getAllSpecies(species) {
-    const db = await dbPromise;
-    const tx = db.transaction("species", "readwrite");
+  const db = await dbPromise;
+  const tx = db.transaction("species", "readwrite");
 
-    for (const specie of species) {
-      await tx.store.put(specie);
-    }
+  for (const specie of species) {
+    await tx.store.put(specie);
+  }
 
-    await tx.done;
+  await tx.done;
 }
 
 export async function getSpeciesById(id) {
   const db = await dbPromise;
-  const tx = db.transaction("species", "readonly"); 
-  const store = tx.store; 
+  const tx = db.transaction("species", "readonly");
+  const store = tx.objectStore("species");
+  const numericId = Number(id);
+  const data = await store.get(numericId);
 
-  return store.get(id);
+  return data;
 }
