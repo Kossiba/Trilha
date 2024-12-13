@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home"
+import Login from "./pages/Login";
 import Menu from "./pages/Menu";
 import Camera from "./pages/Camera";
 import CardDetails from "./pages/CardDetails";
@@ -14,7 +15,7 @@ const App = () => {
       if (navigator.onLine) {
         setIsSyncing(true);
         try {
-          await syncUsersFromBackend();
+         await syncUsersFromBackend();
           await syncSpeciesFromBackend();
         } catch (error) {
           console.error("Erro ao sincronizar dados:", error);
@@ -37,6 +38,7 @@ const App = () => {
       {isSyncing && <div className="sync-message">Sincronizando dados...</div>}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/camera" element={<Camera />} />
         <Route path="/card-details" element={<CardDetails />} />
