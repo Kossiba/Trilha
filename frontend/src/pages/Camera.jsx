@@ -1,3 +1,4 @@
+import "../styles/Camera.css"
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jsQR from "jsqr";
@@ -75,11 +76,16 @@ const QRCodeScanner = () => {
     return () => clearInterval(interval);
   }, [navigate]);
 
+  const handleMenuClick = () => {
+    navigate("/Menu");
+  };
+
   return (
-    <div>
-      <video ref={videoRef} style={{ width: "100%" }} />
+    <div className="camera-container">
+      <video ref={videoRef} className="video-camera" />
       <canvas ref={canvasRef} style={{ display: "none" }} />
       {qrCode && <p>QR Code detectado: {qrCode}</p>}
+      <button className="button-voltar-camera" onClick={handleMenuClick}>VOLTAR</button>
     </div>
   );
 };
