@@ -5,7 +5,7 @@ import Menu from "./pages/Menu";
 import Camera from "./pages/Camera";
 import CardDetails from "./pages/CardDetails";
 import SignUp from "./pages/SignUp";
-//import { syncUsersFromBackend, syncSpeciesFromBackend } from "./dbStatic/sync";
+import { syncUsersFromBackend, syncSpeciesFromBackend } from "./dbStatic/sync";
 import { useEffect, useState } from "react";
 
 const App = () => {
@@ -16,8 +16,8 @@ const App = () => {
       if (navigator.onLine) {
         setIsSyncing(true);
         try {
-         //await syncUsersFromBackend();
-          //await syncSpeciesFromBackend();
+         await syncUsersFromBackend();
+         await syncSpeciesFromBackend();
         } catch (error) {
           console.error("Erro ao sincronizar dados:", error);
         }
