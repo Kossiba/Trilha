@@ -13,6 +13,10 @@ const Login = () => {
   const handleLoginClick = () => {
     navigate("/Menu");
   };
+  
+  const handleSignUpClick = () => {
+    navigate("/SignUp");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -86,6 +90,9 @@ const Login = () => {
         <button className="button-entrar-login" onClick={handleSubmit}>
           ENTRAR
         </button>
+        <a className="a-text-login" onClick={handleSignUpClick}>
+          Cadastrar
+        </a>
         <a className="a-text-login" href="#">
           Esqueceu a senha
         </a>
