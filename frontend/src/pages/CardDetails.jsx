@@ -1,12 +1,10 @@
-//import { useLocation } from "react-router-dom";
-//import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import imgTest from "../assets/imgHome.png";
-//import { getSpeciesById } from "../dbStatic/offline-db";
+import { getSpeciesById } from "../dbStatic/offline-db";
 import "../styles/CardDetails.css";
 
 const CardDetails = () => {
-  // Código dinâmico comentado para uso estático
-  /*
   const location = useLocation();
   const { qrCodeData } = location.state || {};
   const [speciesDetails, setSpeciesDetails] = useState(null);
@@ -31,7 +29,6 @@ const CardDetails = () => {
 
     fetchSpeciesDetails();
   }, [qrCodeData]);
-  */
 
   // Conteúdo estático
   return (
