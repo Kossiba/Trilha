@@ -19,12 +19,9 @@ const dbPromise = openDB("app-db", 1, {
       });
       speciesStore.createIndex("nome", "nome", { unique: true });
       speciesStore.createIndex("nomePopular", "nomePopular", { unique: false });
-      speciesStore.createIndex("bioma", "bioma", { unique: false });
-      speciesStore.createIndex("habitat", "habitat", { unique: false });
-      speciesStore.createIndex("altura", "altura", { unique: false });
-      speciesStore.createIndex("diametro", "diametro", { unique: false });
-      speciesStore.createIndex("longevidade", "longevidade", { unique: false });
-      speciesStore.createIndex("Urlimage", "Urlimage", { unique: true });
+      speciesStore.createIndex("descricao", "descricao", { unique: false });
+      speciesStore.createIndex("caracteristicas", "caracteristicas", { unique: false });
+      speciesStore.createIndex("imgURL", "imgURL", { unique: false });
     }
   },
 });
