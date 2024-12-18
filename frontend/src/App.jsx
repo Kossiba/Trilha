@@ -6,7 +6,7 @@ import Entrar from "./pages/Entrar";
 import Info from "./pages/TrilhaEcologica";
 import CardList from "./pages/CardList";
 import ChangePassword from "./pages/ChangePassword.jsx";
-//import { syncUsersFromBackend, syncSpeciesFromBackend } from "./dbStatic/sync";
+import { syncUsersFromBackend, syncSpeciesFromBackend } from "./dbStatic/sync";
 import { useEffect, useState } from "react";
 
 const App = () => {
@@ -17,8 +17,8 @@ const App = () => {
       if (navigator.onLine) {
         setIsSyncing(true);
         try {
-          //await syncUsersFromBackend();
-          //await syncSpeciesFromBackend();
+          await syncUsersFromBackend();
+          await syncSpeciesFromBackend();
         } catch (error) {
           console.error("Erro ao sincronizar dados:", error);
         }
@@ -26,7 +26,7 @@ const App = () => {
       }
     }
 
-    //synchronizeData();
+    synchronizeData();
 
     window.addEventListener("online", synchronizeData);
 
