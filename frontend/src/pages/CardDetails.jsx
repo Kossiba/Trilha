@@ -13,14 +13,14 @@ const CardDetails = () => {
   const [speciesDetails, setSpeciesDetails] = useState(null);
 
   const handleTelaInicialClick = () => {
-    navigate("/tela-inicial");
+    navigate("/");
   };
 
   useEffect(() => {
     const id = qrCodeData || speciesId;
     if (!id) {
       console.error("ID não fornecido. Redirecionando para a tela inicial.");
-      navigate("/tela-inicial");
+      navigate("/");
       return;
     }
 
