@@ -1,5 +1,5 @@
 import "../styles/Entrar.css";
-import imgLogin from "../assets/imgLogin.png";
+import imgLogin from "/assets/imgLogin.png";
 import { useState } from "react";
 import { loginOffline } from "../dbStatic/offline-db";
 import { useNavigate } from "react-router-dom";
@@ -9,8 +9,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState(false);
-
   const isButtonActive = email !== "" && password !== "";
+
+  const handleNewPasswordClick = () =>{
+    navigate("/nova-senha")
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +33,7 @@ const Login = () => {
       });
       if (response.ok) {
         setLoginError(false);
-        navigate("/tela-inicial");
+        navigate("/");
       } else {
         setLoginError(true);
         console.error("Erro ao fazer login:", response.status);
@@ -45,7 +48,7 @@ const Login = () => {
 
       if (result.success) {
         setLoginError(false);
-        navigate("/tela-inicial");
+        navigate("/");
       } else {
         setLoginError(true);
       }
@@ -98,7 +101,7 @@ const Login = () => {
           * Erro ao fazer login. Verifique seu email e senha e tente novamente.
         </p>
       )}
-      <a className="text-entrar">Esqueceu a senha?</a>
+      <a className="text-entrar" onClick={handleNewPasswordClick}>Esqueceu a senha?</a>
       <button
         className={`button-entrar ${isButtonActive ? "active" : ""}`}
         disabled={!isButtonActive}
