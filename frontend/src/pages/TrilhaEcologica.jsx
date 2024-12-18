@@ -9,7 +9,7 @@ const Info = () => {
   const navigate = useNavigate();
 
   const handleTelaInicialClick = () => {
-    navigate("/tela-inicial");
+    navigate("/");
   };
 
   return (
