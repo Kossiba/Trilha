@@ -26,7 +26,7 @@ const CardDetails = () => {
 
     const fetchSpeciesDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/species/${id}`);
+        const response = await fetch(`https://trilha-2vfh.onrender.com/species/${id}`);
 
         if (response.ok) {
           const data = await response.json();
