@@ -1,5 +1,5 @@
 import "../styles/ChangePassword.css";
-import imgLogin from "../assets/imgLogin.png";
+import imgLogin from "/assets/imgLogin.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -25,7 +25,7 @@ const Login = () => {
         body: JSON.stringify(requestBody),
       });
       if (response.ok) {
-        navigate("/tela-inicial");
+        navigate("/");
       }
     } catch (error) {
       console.error("Erro:", error);
@@ -48,9 +48,9 @@ const Login = () => {
         </label>
       </div>
       <p className="text-changepssword">
-        Digite seu e-mail para redefinir sua senha. Enviaremos um link para você
+        Digite seu e-mail para redefinir sua senha. Enviaremos um codigo de validação para você
         criar uma nova senha.
-      </p>
+      </p>  
       <button
         className={`button-changepassword ${isButtonActive ? "active" : ""}`}
         disabled={!isButtonActive}
