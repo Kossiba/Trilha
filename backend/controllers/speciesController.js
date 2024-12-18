@@ -24,9 +24,9 @@ export const getSpeciesById = async (req,res) =>{
 
 export const createSpecies = async(req,res) =>{
     try{
-        const { nome, nomePopular, bioma, habitat, altura, diametro, longevidade, Urlimage} = req.body;
+        const { nomecientifico, nomepopular, descricao, caracteristicas, imgURL} = req.body;
 
-        const newSpecies = await Species.create({ nome, nomePopular, bioma, habitat, altura, diametro, longevidade, Urlimage });
+        const newSpecies = await Species.create({ nomecientifico, nomepopular, descricao, caracteristicas, imgURL});
         res.status(200).json(newSpecies);
     } catch (error){
         res.status(500).json({ message: "Erro ", error});
