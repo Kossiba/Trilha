@@ -26,6 +26,7 @@ body {
   font-family: 'Inter', sans-serif; /* Garantindo consistência */
   overflow: hidden;
   background-color: #eff7f3;
+  overflow-y: scroll;
 }
 
 a {
