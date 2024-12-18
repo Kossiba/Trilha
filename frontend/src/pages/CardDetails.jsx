@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faShareNodes } from "@fortawesome/free-solid-svg-icons";
-//import { getSpeciesById } from "../dbStatic/offline-db";
 import "../styles/CardDetails.css";
 import { useNavigate, useLocation } from "react-router-dom";
+import { getSpeciesById } from "../dbStatic/offline-db";
 import NavBar from "../components/NavBar";
 
 const CardDetails = () => {
@@ -11,6 +11,7 @@ const CardDetails = () => {
   const location = useLocation();
   const { qrCodeData, speciesId } = location.state || {};
   const [speciesDetails, setSpeciesDetails] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleTelaInicialClick = () => {
     navigate("/");
@@ -26,21 +27,44 @@ const CardDetails = () => {
 
     const fetchSpeciesDetails = async () => {
       try {
-        const response = await fetch(`https://trilha-2vfh.onrender.com/species/${id}`);
-
-        if (response.ok) {
-          const data = await response.json();
-          setSpeciesDetails(data);
+        if (navigator.onLine) {
+          console.log("Tentando buscar os dados online...");
+          const response = await fetch(
+            `https://trilha-2vfh.onrender.com/species/${id}`
+          );
+          if (response.ok) {
+            const data = await response.json();
+            setSpeciesDetails(data);
+          } else {
+            console.error(
+              "Falha ao buscar detalhes online. Tentando offline..."
+            );
+            throw new Error("Falha ao buscar online");
+          }
         } else {
-          console.error("Failed to fetch species details");
+          console.log("Sem conexão. Tentando buscar offline...");
+          const result = await getSpeciesById(id);
+
+          if (result) {
+            setSpeciesDetails(result);
+          } else {
+            setError(
+              "Não foi possível carregar os detalhes da espécie offline."
+            );
+          }
         }
       } catch (error) {
+        setError("Erro ao carregar os dados da espécie.");
         console.error("Error fetching data:", error);
       }
     };
 
     fetchSpeciesDetails();
   }, [qrCodeData, speciesId, navigate]);
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   if (!speciesDetails) {
     return <p>Carregando detalhes...</p>;
@@ -70,16 +94,18 @@ const CardDetails = () => {
           }}
         />
       </div>
-      <img src={speciesDetails.imgURL || "#"} className="img-carddetails" />
+      <img
+        src={speciesDetails.imgURL || "placeholder.png"}
+        alt={speciesDetails.nomepopular || "Imagem da espécie"}
+        className="img-carddetails"
+      />
       <div className="div-text-carddetails">
         <p className="subttile-carddetails">
           {speciesDetails.nomepopular} ({speciesDetails.nomecientifico})
         </p>
-        <p className="text-carddetails">
-          {speciesDetails.descricao}
-          <p className="subttile-carddetails">Características</p>
-          <p className="text-carddetails">{speciesDetails.caracteristicas}</p>
-        </p>
+        <p className="text-carddetails">{speciesDetails.descricao}</p>
+        <p className="subttile-carddetails">Características</p>
+        <p className="text-carddetails">{speciesDetails.caracteristicas}</p>
       </div>
       <div className="div-navbar">
         <NavBar />
