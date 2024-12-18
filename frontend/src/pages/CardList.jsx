@@ -13,7 +13,7 @@ const CardList = () => {
 
   const fetchSpecies = async () => {
     try {
-      const response = await fetch("http://localhost:3000/species");
+      const response = await fetch("https://trilha-2vfh.onrender.com/species");
       if (!response.ok) {
         throw new Error("Erro ao buscar as espécies");
       }
