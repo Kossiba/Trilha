@@ -1,86 +1,87 @@
-import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faShareNodes } from "@fortawesome/free-solid-svg-icons";
-//import { getSpeciesById } from "../dbStatic/offline-db";
-import "../styles/CardDetails.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import "../styles/QRCodeScanner.css";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import jsQR from "jsqr";
 import NavBar from "../components/NavBar";
 
-const CardDetails = () => {
+const QRCodeScanner = () => {
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+  const [qrCode, setQrCode] = useState(null);
   const navigate = useNavigate();
-  const location = useLocation();
-  const { qrCodeData, speciesId } = location.state || {};
-  const [speciesDetails, setSpeciesDetails] = useState(null);
-
-  const handleTelaInicialClick = () => {
-    navigate("/");
-  };
 
   useEffect(() => {
-    const id = qrCodeData || speciesId;
-    if (!id) {
-      console.error("ID não fornecido. Redirecionando para a tela inicial.");
-      navigate("/tela-inicial");
-      return;
+    // Verifica se getUserMedia está disponível
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices
+        .getUserMedia({ video: { facingMode: "environment" } })
+        .then((stream) => {
+          if (videoRef.current) {
+            videoRef.current.srcObject = stream;
+
+            // Aguarde o vídeo carregar completamente
+            videoRef.current.onloadedmetadata = () => {
+              videoRef.current.play().catch((err) => {
+                console.warn("Erro ao iniciar a reprodução do vídeo:", err);
+              });
+            };
+          }
+        })
+        .catch((err) => {
+          console.error("Erro ao acessar a câmera:", err);
+        });
+    } else {
+      console.error("getUserMedia não é suportado neste navegador.");
     }
 
-    const fetchSpeciesDetails = async () => {
-      try {
-        const response = await fetch(`http://localhost:3000/species/${id}`);
-
-        if (response.ok) {
-          const data = await response.json();
-          setSpeciesDetails(data);
-        } else {
-          console.error("Failed to fetch species details");
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
+    return () => {
+      // Limpa os recursos da câmera ao desmontar o componente
+      if (videoRef.current && videoRef.current.srcObject) {
+        const tracks = videoRef.current.srcObject.getTracks();
+        tracks.forEach((track) => track.stop());
       }
     };
+  }, []);
 
-    fetchSpeciesDetails();
-  }, [qrCodeData, speciesId, navigate]);
+  useEffect(() => {
+    // Verificar QR Code a cada intervalo
+    const interval = setInterval(() => {
+      if (canvasRef.current && videoRef.current) {
+        const canvas = canvasRef.current;
+        const context = canvas.getContext("2d");
+        const video = videoRef.current;
 
-  if (!speciesDetails) {
-    return <p>Carregando detalhes...</p>;
-  }
+        if (video.videoWidth && video.videoHeight) {
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+
+          context.drawImage(video, 0, 0, canvas.width, canvas.height);
+          const imageData = context.getImageData(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
+
+          // Detecta QR Code
+          const code = jsQR(imageData.data, canvas.width, canvas.height);
+          if (code) {
+            setQrCode(code.data);
+            navigate("/card-details", { state: { qrCodeData: code.data } });
+            clearInterval(interval);
+          }
+        }
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [navigate]);
 
   return (
-    <div className="card-details-container">
-      <div className="header-carddetails">
-        <FontAwesomeIcon
-          icon={faArrowLeft}
-          style={{
-            color: "#0C9762",
-            width: "2.02vh",
-            height: "2.02vh",
-            marginLeft: "3.91vh",
-          }}
-          onClick={handleTelaInicialClick}
-        />
-        <p className="tittle-carddetails">Detalhes da espécie</p>
-        <FontAwesomeIcon
-          icon={faShareNodes}
-          style={{
-            color: "#0C9762",
-            width: "3vh",
-            height: "3vh",
-            marginRight: "4vh",
-          }}
-        />
-      </div>
-      <img src={speciesDetails.imgURL || "#"} className="img-carddetails" />
-      <div className="div-text-carddetails">
-        <p className="subttile-carddetails">
-          {speciesDetails.nomepopular} ({speciesDetails.nomecientifico})
-        </p>
-        <p className="text-carddetails">
-          {speciesDetails.descricao}
-          <p className="subttile-carddetails">Características</p>
-          <p className="text-carddetails">{speciesDetails.caracteristicas}</p>
-        </p>
-      </div>
+    <div className="camera-container">
+      <video ref={videoRef} className="video-camera" />
+      <canvas ref={canvasRef} style={{ display: "none" }} />
+      {qrCode && <p>QR Code detectado: {qrCode}</p>}
       <div className="div-navbar">
         <NavBar />
       </div>
@@ -88,4 +89,4 @@ const CardDetails = () => {
   );
 };
 
-export default CardDetails;
+export default QRCodeScanner;
