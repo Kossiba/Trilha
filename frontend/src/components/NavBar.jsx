@@ -8,7 +8,7 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   const handleHomeClick = () => {
-    navigate("/tela-inicial");
+    navigate("/");
   };
 
   const handleQRCodeScannerClick = () => {
