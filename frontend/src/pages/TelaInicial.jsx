@@ -1,5 +1,5 @@
 import "../styles/TelaInicial.css";
-import imgDiv1TelaInicial from "../assets/imgDiv1TelaInicial.png";
+import imgDiv1TelaInicial from "../assets/imgDiv1TelaInicial.webp";
 import imgDiv2TelaInicial from "../assets/imgDiv2TelaInicial.jpg";
 import imgDiv3TelaInicial from "../assets/imgDiv3TelaInicial.jpg";
 import NavBar from "../components/NavBar";
