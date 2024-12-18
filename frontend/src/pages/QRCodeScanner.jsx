@@ -13,7 +13,7 @@ const CardDetails = () => {
   const [speciesDetails, setSpeciesDetails] = useState(null);
 
   const handleTelaInicialClick = () => {
-    navigate("/tela-inicial");
+    navigate("/");
   };
 
   useEffect(() => {
