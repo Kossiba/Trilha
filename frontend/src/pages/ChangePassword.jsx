@@ -17,7 +17,7 @@ const Login = () => {
     };
 
     try {
-      const response = await fetch("https://trilha-2vfh.onrender.com/users/login", {
+      const response = await fetch("https://trilha-2vfh.onrender.com/users/sendResetPasswordEmail", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
