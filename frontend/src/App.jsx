@@ -44,7 +44,7 @@ const App = () => {
         <Route path="/info" element={<Info />} />
         <Route path="/entrar" element={<Entrar />} />
         <Route path="/nova-senha" element={<ChangePassword />} />
-        <Route path="/camera" element={<QRCodeScanner />} />
+        <Route path="/QRCodeScanner" element={<QRCodeScanner />} />
         <Route path="/card-details" element={<CardDetails />} />
         <Route path="/card-list" element={<CardList />} />
       </Routes>
