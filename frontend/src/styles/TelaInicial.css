@@ -1,0 +1,135 @@
+.container-telaInicial {
+  background-color: #EFF7F3;
+  height: 100vh;
+  width: 100%;
+  padding: 0;
+}
+.div-telainicial {
+  margin-left: 3.485vh;
+  background-color: #EFF7F3;
+}
+.tittle-telaInicial {
+  color: #0c9762;
+  font-weight: 700;
+  font-family: "inter";
+  font-size: 2.5vh;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3.1vh;
+  margin-top: 5vh;
+}
+.divs-telaInicial {
+  width: 91.5%;
+  height: 25vh;
+  margin-bottom: 2.5vh;
+  border-radius: 8px;
+}
+.img-div-telaInicial {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  color: #00000080;
+}
+.text-div1-telaInicial {
+  color: #ffffff;
+
+  text-decoration: none;
+
+  position: absolute;
+  top: 15.7vh;
+  right: 0vh;
+  text-align: Right;
+
+  margin-right: 46px;
+
+  font-family: "inter";
+  font-weight: 400;
+  font-size: 2.5vh;
+}
+.button-div1-telaInicial {
+  background-color: #0c9762;
+  color: #ffffff;
+
+  font-size: 2.5vh;
+
+  position: absolute;
+  top: 26vh;
+  right: 6.6vh;
+
+  border-style: none;
+  border-radius: 50px;
+
+  z-index: 1000;
+
+  width: 12.3vh;
+  height: 6.13vh;
+}
+.text-div2-telaInicial {
+  color: #ffffff;
+
+  text-decoration: none;
+
+  position: absolute;
+  top: 43.5vh;
+  left: 6vh;
+
+  font-family: "inter";
+  font-weight: 400;
+  font-size: 2.5vh;
+}
+.button-div2-telaInicial {
+  background-color: #0c9762;
+  color: #ffffff;
+
+  position: absolute;
+  bottom: 41.4vh;
+  left: 6.6vh;
+  font-size: 2.5vh;
+  border-style: none;
+  border-radius: 50px;
+
+  z-index: 1000;
+
+  width: 16.565vh;
+  height: 5.64vh;
+}
+.text-div3-telaInicial {
+  color: #ffffff;
+
+  text-decoration: none;
+
+  position: absolute;
+  bottom: 20.9vh;
+  right: 7svh;
+  text-align: right;
+
+  font-family: "inter";
+  font-weight: 400;
+  font-size: 2.5vh;
+}
+.button-div3-telaInicial {
+  background-color: #0c9762;
+  color: #ffffff;
+
+  font-size: 2.5vh;
+  position: absolute;
+  bottom: 14.4vh;
+  right: 6.5svh;
+
+  border-style: none;
+  border-radius: 50px;
+
+  z-index: 1000;
+
+  width: 17.68vh;
+  height: 5.4vh;
+}
+.div-navbar {
+  position: fixed;
+  bottom: 3.8vh;
+  left: 50%;
+  transform: translateX(-50%);
+
+  z-index: 1000;
+}
