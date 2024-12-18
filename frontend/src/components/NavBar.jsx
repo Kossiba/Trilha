@@ -12,7 +12,7 @@ const NavBar = () => {
   };
 
   const handleQRCodeScannerClick = () => {
-    navigate("/camera");
+    navigate("/QRCodeScanner");
   };
 
   const handleCardListClick = () => {
