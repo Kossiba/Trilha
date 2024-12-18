@@ -24,6 +24,7 @@
   height: 25vh;
   margin-bottom: 2.5vh;
   border-radius: 8px;
+  position: relative;
 }
 .img-div-telaInicial {
   width: 100%;
@@ -36,26 +37,24 @@
 
   text-decoration: none;
 
-  position: absolute;
-  top: 15.7vh;
-  right: 0vh;
+  top: 18.75%;
+  right: 7.31%;
   text-align: Right;
-
-  margin-right: 46px;
 
   font-family: "inter";
   font-weight: 400;
-  font-size: 2.5vh;
+  font-size: 2.2vh;
+  position: absolute
 }
 .button-div1-telaInicial {
   background-color: #0c9762;
   color: #ffffff;
 
-  font-size: 2.5vh;
+  font-size: 2.2vh;
 
   position: absolute;
-  top: 26vh;
-  right: 6.6vh;
+  top: 58.75%;
+  right: 7.31%;
 
   border-style: none;
   border-radius: 50px;
@@ -71,21 +70,21 @@
   text-decoration: none;
 
   position: absolute;
-  top: 43.5vh;
-  left: 6vh;
+  top: 23.75%;
+  left: 6.09%;
 
   font-family: "inter";
   font-weight: 400;
-  font-size: 2.5vh;
+  font-size: 2.2vh;
 }
 .button-div2-telaInicial {
   background-color: #0c9762;
   color: #ffffff;
 
   position: absolute;
-  bottom: 41.4vh;
-  left: 6.6vh;
-  font-size: 2.5vh;
+  top: 55%;
+  left: 6.09%;  
+  font-size: 2.2vh;
   border-style: none;
   border-radius: 50px;
 
@@ -100,8 +99,8 @@
   text-decoration: none;
 
   position: absolute;
-  bottom: 20.9vh;
-  right: 7svh;
+  top: 18.75%;
+  right: 7.31%;
   text-align: right;
 
   font-family: "inter";
@@ -114,8 +113,8 @@
 
   font-size: 2.5vh;
   position: absolute;
-  bottom: 14.4vh;
-  right: 6.5svh;
+  top: 58.75%;
+  right: 7.31%;
 
   border-style: none;
   border-radius: 50px;
