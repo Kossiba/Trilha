@@ -11,9 +11,9 @@ const Login = () => {
   const [loginError, setLoginError] = useState(false);
   const isButtonActive = email !== "" && password !== "";
 
-  const handleNewPasswordClick = () =>{
-    navigate("/nova-senha")
-  }
+  const handleNewPasswordClick = () => {
+    navigate("/nova-senha");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,13 +24,16 @@ const Login = () => {
     };
 
     try {
-      const response = await fetch("https://trilha-2vfh.onrender.com/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      });
+      const response = await fetch(
+        "https://trilha-2vfh.onrender.com/users/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
       if (response.ok) {
         setLoginError(false);
         navigate("/");
@@ -101,7 +104,9 @@ const Login = () => {
           * Erro ao fazer login. Verifique seu email e senha e tente novamente.
         </p>
       )}
-      <a className="text-entrar" onClick={handleNewPasswordClick}>Esqueceu a senha?</a>
+      <a className="text-entrar" onClick={handleNewPasswordClick}>
+        Esqueceu a senha?
+      </a>
       <button
         className={`button-entrar ${isButtonActive ? "active" : ""}`}
         disabled={!isButtonActive}
