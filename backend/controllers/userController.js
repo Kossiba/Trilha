@@ -11,8 +11,15 @@ const SECRET_KEY = secretKey;
 // Faz um SELECT * na tabela Users
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.findAll();
-    res.status(200).json(users);
+    const { page = 1, limit = 10 } = req.query;
+    const offset = (page - 1) * limit;
+
+    const users = await User.findAndCountAll({ limit, offset });
+    res.status(200).json({
+      total: users.count,
+      pages: Math.ceil(users.count / limit),
+      users: users.rows,
+    });
   } catch (error) {
     res.status(500).json({ message: "Erro ao buscar usuários", error });
   }
@@ -22,7 +29,7 @@ export const getAllUsers = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { login, password } = req.body;
-    
+
     if (!login || !password) {
       return res.status(400).json({ message: "Insira login e senha" });
     }
@@ -96,34 +103,58 @@ export const deleteUser = async (req, res) => {
   }
 };
 
-export const sendResetPasswordEmail = async (req,res) =>{
+export const updateUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, email } = req.body;
+
+    const result = await user.update({ name, email }, { where: { id } });
+
+    if (result[0] === 0) {
+      return res.status(404).json({ message: "Usuário não encontrado" });
+    }
+
+    return res.status(200).json({ message: "Usuário atualizado com sucesso" });
+  } catch (error) {
+    return res.status(500).json({ message: "Erro ao atualizar usuário", error });
+  }
+};
+
+export const sendResetPasswordEmail = async (req, res) => {
   try {
     const { email } = req.body;
 
     if (!email) {
-      return res.status(400).json({ message: "Por favor, informe seu e-mail." });
+      return res
+        .status(400)
+        .json({ message: "Por favor, informe seu e-mail." });
     }
 
     const user = await User.findOne({ where: { email } });
 
     if (!user) {
-      return res.status(200).json({ message: "Caso email seja valido, um codigo de redefinição será enviado." });
+      return res.status(200).json({
+        message:
+          "Caso email seja valido, um codigo de redefinição será enviado.",
+      });
     }
 
-    const resetCode = Math.floor(100000 + Math.random() * 900000).toString().padStart(6, '0');
+    const resetCode = Math.floor(100000 + Math.random() * 900000)
+      .toString()
+      .padStart(6, "0");
     const resetCodeExpires = Date.now() + 3600000;
 
     await user.update({
       resetPasswordToken: resetCode,
-      resetPasswordExpires: resetCodeExpires
+      resetPasswordExpires: resetCodeExpires,
     });
-    
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      }
+        pass: process.env.EMAIL_PASS,
+      },
     });
 
     const mailOptions = {
@@ -135,12 +166,13 @@ export const sendResetPasswordEmail = async (req,res) =>{
 
     await transporter.sendMail(mailOptions);
 
-    return res.status(200).json({ message: "Se o e-mail existir, um código de redefinição será enviado." });
-
-  } catch(error){
+    return res.status(200).json({
+      message: "Se o e-mail existir, um código de redefinição será enviado.",
+    });
+  } catch (error) {
     res.status(500).json({ message: "Erro", error });
   }
-}
+};
 
 export const resetPassword = async (req, res) => {
   try {
@@ -159,9 +191,11 @@ export const resetPassword = async (req, res) => {
     const user = await User.findOne({ where: { name } });
 
     if (!user) {
-      return res.status(400).json({ message: "Nome do usuário não encontrado" });
+      return res
+        .status(400)
+        .json({ message: "Nome do usuário não encontrado" });
     }
-    
+
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
 
