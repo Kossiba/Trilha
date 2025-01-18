@@ -16,7 +16,8 @@ export default defineConfig({
         name: "TrilhaUTFPR-DV",
       },
       workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,jpg,webp,jpeg}"], // Inclui os tipos de arquivos comuns
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,jpg,webp,jpeg}"], // Tipos de arquivos suportados
+        globDirectory: "dist", // Diretório padrão do build
         additionalManifestEntries: [
           { url: "/", revision: null },
           { url: "/index.html", revision: null },
@@ -32,7 +33,7 @@ export default defineConfig({
           { url: "/assets/Tucano.jpeg", revision: null },
         ],
         runtimeCaching: [
-          // Cache para documentos, scripts e estilos
+          // Documentos, scripts e estilos
           {
             urlPattern: ({ request }) =>
               request.destination === "document" ||
@@ -43,23 +44,26 @@ export default defineConfig({
               cacheName: "vite-app-cache",
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 dias
+                maxAgeSeconds: 30 * 24 * 60 * 60,
               },
             },
           },
-          // Cache para imagens
+          // Imagens
           {
             urlPattern: ({ request }) => request.destination === "image",
             handler: "CacheFirst",
             options: {
               cacheName: "image-cache",
               expiration: {
-                maxEntries: 100, // Máximo de 100 imagens
-                maxAgeSeconds: 7 * 24 * 60 * 60, // 7 dias
+                maxEntries: 100,
+                maxAgeSeconds: 7 * 24 * 60 * 60,
               },
             },
           },
         ],
+      },
+      devOptions: {
+        enabled: true, // Ativa o Workbox em desenvolvimento para depuração
       },
     }),
   ],
