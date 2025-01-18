@@ -1,6 +1,6 @@
 .container-info {
   background-color: #eff7f3;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   padding: 0;
 }
@@ -27,6 +27,7 @@
   border-radius: 8px;
 }
 .div-text-info {
+  background-color: #eff7f3;
   margin-right: 7.5vh;
   margin-left: 7.5vh;
 }
