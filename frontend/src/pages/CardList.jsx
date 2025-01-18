@@ -17,24 +17,27 @@ const CardList = () => {
       if (navigator.onLine) {
         console.log("Tentando buscar os dados online...");
         const response = await fetch("https://trilha-2vfh.onrender.com/species");
+  
         if (response.ok) {
           const data = await response.json();
           setSpecies(data);
           setLoading(false);
+          return;
         } else {
-          console.error("Falha ao buscar dados online. Tentando offline...");
-          throw new Error("Falha ao buscar online");
-        }
-      } else {
-        console.log("Sem conexão. Tentando buscar offline...");
-        const result = await fetchSpeciesFromCache();
-        if (result) {
-          setSpecies(result);
-          setLoading(false);
-        } else {
-          throw new Error("Não foi possível carregar os detalhes da espécie offline.");
+          console.warn("Falha ao buscar dados online. Status:", response.status);
         }
       }
+      console.log("cheguei aqui");
+      // Fallback para offline
+      console.log("Sem conexão ou falha na API. Tentando buscar offline...");
+      const result = await fetchSpeciesFromCache();
+      console.log(result);
+      if (result.length > 0) {
+        setSpecies(result);
+      } else {
+        console.warn("Nenhum dado encontrado no cache.");
+      }
+      setLoading(false);
     } catch (err) {
       setError("Erro ao carregar os dados da espécie.");
       console.error("Erro ao buscar os dados:", err);
