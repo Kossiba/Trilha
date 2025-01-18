@@ -7,7 +7,7 @@ const dbPromise = openDB("app-db", 1, {
         keyPath: "id",
         autoIncrement: true,
       });
-      userStore.createIndex("name", "name", { unique: true });
+      userStore.createIndex("name", "name", { unique: false });
       userStore.createIndex("email", "email", { unique: true });
       userStore.createIndex("password", "password", { unique: false });
     }
@@ -17,8 +17,8 @@ const dbPromise = openDB("app-db", 1, {
         keyPath: "id",
         autoIncrement: true,
       });
-      speciesStore.createIndex("nome", "nome", { unique: true });
-      speciesStore.createIndex("nomePopular", "nomePopular", { unique: false });
+      speciesStore.createIndex("nomecientifico", "nomecientifico", { unique: true });
+      speciesStore.createIndex("nomepopular", "nomepopular", { unique: false });
       speciesStore.createIndex("descricao", "descricao", { unique: false });
       speciesStore.createIndex("caracteristicas", "caracteristicas", { unique: false });
       speciesStore.createIndex("imgURL", "imgURL", { unique: false });
