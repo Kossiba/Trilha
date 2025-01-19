@@ -16,7 +16,17 @@ export default defineConfig({
         name: 'TrilhaUTFPR-DV',
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,webp,jpeg}'],
+        additionalManifestEntries: [
+          { url: "/", revision: null },
+          { url: "/index.html", revision: null },
+          { url: "/assets/imgDiv1TelaInicial.webp", revision: null },
+          { url: "/assets/imgDiv2TelaInicial.jpg", revision: null },
+          { url: "/assets/imgDiv3TelaInicial.jpg", revision: null },
+          { url: "/assets/imgLogin.png", revision: null },
+          { url: "/assets/BeijaFlor.jpeg", revision: null },
+          { url: "/assets/Tucano.jpeg", revision: null },
+        ],
         runtimeCaching: [
           {
             urlPattern: ({ request }) =>
@@ -29,6 +39,17 @@ export default defineConfig({
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 30 * 24 * 60 * 60,
+              },
+            },
+          },
+          {
+            urlPattern: ({ request }) => request.destination === 'image',
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'image-cache',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 7 * 24 * 60 * 60,
               },
             },
           },
