@@ -1,21 +1,9 @@
-import React, { useEffect } from "react";
 import "../styles/TelaInicial.css";
-import imgDiv1TelaInicial from "/assets/imgDiv1TelaInicial.webp";
-import imgDiv2TelaInicial from "/assets/imgDiv2TelaInicial.jpg";
-import imgDiv3TelaInicial from "/assets/imgDiv3TelaInicial.jpg";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 
 const TelaInicial = () => {
   const navigate = useNavigate();
-  useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("/service-worker.js")
-        .then(() => console.log("Service Worker registrado com sucesso!"))
-        .catch((err) => console.error("Erro ao registrar o Service Worker:", err));
-    }
-  }, []);
 
   const handleEntrarClick = () => {
     navigate("/Entrar");
@@ -31,7 +19,7 @@ const TelaInicial = () => {
       <div className="div-telainicial">
         <div className="divs-telaInicial">
           <img
-            src={imgDiv1TelaInicial}
+            src="/assets/imgDiv1TelaInicial.webp"
             className="img-div-telaInicial"
             alt="Biodiversidade"
           />
@@ -44,7 +32,7 @@ const TelaInicial = () => {
         </div>
         <div className="divs-telaInicial">
           <img
-            src={imgDiv2TelaInicial}
+            src="/assets/imgDiv2TelaInicial.jpg"
             className="img-div-telaInicial"
             alt="Trilha Ecológica"
           />
@@ -53,13 +41,16 @@ const TelaInicial = () => {
             <br />
             ecológica?
           </a>
-          <button className="button-div2-telaInicial" onClick={handleSaibaMaisClick}>
+          <button
+            className="button-div2-telaInicial"
+            onClick={handleSaibaMaisClick}
+          >
             Saiba mais
           </button>
         </div>
         <div className="divs-telaInicial">
           <img
-            src={imgDiv3TelaInicial}
+            src="/assets/imgDiv3TelaInicial.jpg"
             className="img-div-telaInicial"
             alt="Administrador"
           />
@@ -68,7 +59,10 @@ const TelaInicial = () => {
             <br />
             Administrador
           </a>
-          <button className="button-div3-telaInicial" onClick={handleEntrarClick}>
+          <button
+            className="button-div3-telaInicial"
+            onClick={handleEntrarClick}
+          >
             Acesse aqui
           </button>
           <div className="div-navbar">
