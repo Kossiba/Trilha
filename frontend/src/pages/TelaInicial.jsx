@@ -19,7 +19,7 @@ const TelaInicial = () => {
       <div className="div-telainicial">
         <div className="divs-telaInicial">
           <img
-            src="/assets/imgDiv1TelaInicial.webp"
+            src="/assets/imgDiv1TelaInicial.png"
             className="img-div-telaInicial"
             alt="Biodiversidade"
           />
@@ -32,7 +32,7 @@ const TelaInicial = () => {
         </div>
         <div className="divs-telaInicial">
           <img
-            src="/assets/imgDiv2TelaInicial.jpg"
+            src="/assets/imgDiv2TelaInicial.png"
             className="img-div-telaInicial"
             alt="Trilha Ecológica"
           />
@@ -50,7 +50,7 @@ const TelaInicial = () => {
         </div>
         <div className="divs-telaInicial">
           <img
-            src="/assets/imgDiv3TelaInicial.jpg"
+            src="/assets/imgDiv3TelaInicial.png"
             className="img-div-telaInicial"
             alt="Administrador"
           />
