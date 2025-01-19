@@ -3,15 +3,15 @@ const STATIC_ASSETS = [
   "/",
   "/index.html",
   "/assets/BeijaFlor.png",
-  "/assets/FlorDoAmor.jpeg",
-  "/assets/FlorVermelha.jpeg",
-  "/assets/Girassol.jpeg",
-  "/assets/imgDiv1TelaInicial.webp",
-  "/assets/imgDiv2TelaInicial.jpg",
-  "/assets/imgDiv3TelaInicial.jpg",
+  "/assets/FlorDoAmor.png",
+  "/assets/FlorVermelha.png",
+  "/assets/Girassol.png",
+  "/assets/imgDiv1TelaInicial.png",
+  "/assets/imgDiv2TelaInicial.png",
+  "/assets/imgDiv3TelaInicial.png",
   "/assets/imgLogin.png",
-  "/assets/Passaro.jpeg",
-  "/assets/Tucano.jpeg",
+  "/assets/Passaro.png",
+  "/assets/Tucano.png",
 ];
 
 self.addEventListener("install", (event) => {
