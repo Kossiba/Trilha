@@ -1,7 +1,7 @@
 import "../styles/TrilhaEcologica.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faShareNodes } from "@fortawesome/free-solid-svg-icons";
-import imgInfo from "/assets/imgDiv2TelaInicial.jpg";
+import imgInfo from "/assets/imgDiv2TelaInicial.png";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 
