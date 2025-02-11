@@ -19,6 +19,8 @@ const CardDetails = () => {
 
   useEffect(() => {
     const id = qrCodeData || speciesId;
+    console.log("ID recebido:", id);
+
     if (!id) {
       console.error("ID não fornecido. Redirecionando para a tela inicial.");
       navigate("/");
@@ -29,12 +31,21 @@ const CardDetails = () => {
       try {
         if (navigator.onLine) {
           console.log("Tentando buscar os dados online...");
+
           const response = await fetch(
             `https://trilha-2vfh.onrender.com/species/${id}`
           );
           if (response.ok) {
             const data = await response.json();
-            setSpeciesDetails(data);
+            console.log("Dados recebidos da API:", data);
+
+            if (Array.isArray(data) && data.length > 0) {
+              setSpeciesDetails(data[0]); 
+            } else if (typeof data === "object" && data !== null) {
+              setSpeciesDetails(data);
+            } else {
+              setError("Nenhuma informação encontrada.");
+            }
           } else {
             console.error(
               "Falha ao buscar detalhes online. Tentando offline..."
@@ -55,7 +66,7 @@ const CardDetails = () => {
         }
       } catch (error) {
         setError("Erro ao carregar os dados da espécie.");
-        console.error("Error fetching data:", error);
+        console.error("Erro na requisição:", error);
       }
     };
 
