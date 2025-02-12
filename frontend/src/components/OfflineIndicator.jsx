@@ -1,5 +1,5 @@
 import { useNetwork } from '../Context/NetworkProvider';
-import './OfflineIndicator.css';
+import "../styles/OfflineIndicator.css"
 
 const OfflineIndicator = () => {
   const { isConnected } = useNetwork();
