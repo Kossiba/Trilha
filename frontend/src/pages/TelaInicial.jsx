@@ -13,6 +13,10 @@ const TelaInicial = () => {
     navigate("/info");
   };
 
+  const handleMapaClick = () => {
+    navigate("/mapa");
+  };
+
   return (
     <div className="container-telaInicial">
       <p className="tittle-telaInicial">Descubra a trilha da UTFPR</p>
@@ -28,7 +32,9 @@ const TelaInicial = () => {
             <br />
             biodiversidade da trilha!
           </a>
-          <button className="button-div1-telaInicial">Iniciar</button>
+          <button className="button-div1-telaInicial" onClick={handleMapaClick}>
+            Iniciar
+          </button>
         </div>
         <div className="divs-telaInicial">
           <img
