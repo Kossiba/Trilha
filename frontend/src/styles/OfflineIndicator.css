@@ -3,9 +3,9 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: red;
+    background-color: #D4A373;
     color: white;
-    text-align: center;
+    text-align: center; 
     height: 4%;
     font-weight: bold;
     z-index: 1000;
