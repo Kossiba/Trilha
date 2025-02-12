@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
 
     const requestBody = {
-      login: email,
+      email: email,
     };
 
     try {
